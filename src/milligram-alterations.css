@@ -1,0 +1,12 @@
+.button, button {
+  text-transform: none;
+  padding: 0 2.0rem;
+  height: 3.5rem;
+  line-height: 3.5rem;
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: 0;
+}

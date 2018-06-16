@@ -27,4 +27,4 @@ firebase.initializeApp({
 const Auth = props => <FirebaseAuth uiConfig={signInUiConfig} firebaseAuth={firebase.auth()} {...props} />;
 
 export { firebase, Auth };
-export const firestore = firebase.firestore, storage = firebase.storage;
+export const firestore = firebase.firestore(), storage = firebase.storage(), auth = firebase.auth();

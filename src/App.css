@@ -1,28 +1,32 @@
-.App {
+.Chrome-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f4f5f6;
+  border-bottom: 0.1rem solid #d1d1d1;
+}
+
+.Chrome-header-text {
+  flex: 1 1 auto;
   text-align: center;
+  margin: 10px;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.Chrome-logout-button {
+  flex: 0 1 auto;
+  margin: 0px 20px;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.Chrome-middle {
+  display: flex;
+  justify-content: center;
+  margin: 3rem 0.5rem 1rem 0.5rem;
 }
 
-.App-title {
-  font-size: 1.5em;
+.Chrome-content {
+  width: 60%;
 }
 
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+input.FieldEditor-field {
+  width: 30rem;
 }

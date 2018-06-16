@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { firebase, Auth } from '../firebase';
+import { Auth, auth } from '../firebase';
 
 export default class LoginGuard extends Component {
   state = {
@@ -7,7 +7,7 @@ export default class LoginGuard extends Component {
   }
 
   componentDidMount() {
-    this.unregisterAuthHandler = firebase.auth().onAuthStateChanged(user => {
+    this.unregisterAuthHandler = auth.onAuthStateChanged(user => {
       this.setState({
         currentUser: user
       });
