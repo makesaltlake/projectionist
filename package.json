@@ -3,14 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@reach/router": "^1.1.1",
+    "firebase": "^5.0.4",
+    "firebase-admin": "^5.12.1",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "react-firebaseui": "^3.0.4",
     "react-scripts": "1.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "PORT=4700 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "repl": "./scripts/firebase.admin.repl.js"
   }
 }

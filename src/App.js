@@ -1,19 +1,26 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { Router } from '@reach/router';
+
+import { firebase } from './firebase';
+
+import LoginGuard from './components/LoginGuard';
+
 import './App.css';
 
+const Hi = ({logout}) => <div>Hello! Looks like you're logged in. <button onClick={logout}>Log out</button></div>
+
 class App extends Component {
+  logout = () => {
+    firebase.auth().signOut();
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <Router>
+        <LoginGuard path="/">
+          <Hi path="/" logout={this.logout}/>
+        </LoginGuard>
+      </Router>
     );
   }
 }
