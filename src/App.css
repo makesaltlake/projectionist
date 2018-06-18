@@ -27,6 +27,63 @@
   width: 60%;
 }
 
+.Display-add-panel-field {
+  width: 20rem;
+}
+
+.Display-panel-grid {
+  display: grid;
+  grid-column-gap: 0.5rem;
+  justify-content: start;
+  grid-template-columns: auto auto auto auto auto 1fr;
+}
+
 input.FieldEditor-field {
   width: 30rem;
+}
+
+.ImageEditor-image {
+  display: block;
+  width: 30rem;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.PanelItem-button-row {
+  display: grid;
+  grid-column-gap: 0.5rem;
+  grid-auto-flow: column;
+  justify-content: end;
+}
+
+.PanelItem-editor {
+  grid-column-start: 1;
+  grid-column-end: span 5;
+  border: 0.1rem solid #d1d1d1;
+  padding: 2rem;
+  border-radius: 0.4rem;
+}
+
+input.PanelItem-name-field {
+  width: 30rem;
+}
+
+input.PanelItem-seconds-field {
+  width: 5rem;
+}
+
+.PanelItem-name {
+  grid-column: 1;
+}
+
+.PanelItem-edit {
+  grid-column: 2;
+}
+
+.PanelItem-move-up {
+  grid-column: 3;
+}
+
+.PanelItem-move-down {
+  grid-column: 4;
 }

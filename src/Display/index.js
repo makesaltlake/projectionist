@@ -2,11 +2,20 @@ import React, { Component } from 'react';
 
 import { firestore } from '../firebase';
 
+import types from './types';
 import FieldEditor from '../components/FieldEditor';
+import PanelItem from './PanelItem';
+
+const panelTemplates = {
+  image: {
+    imageUrl: null
+  }
+}
 
 export default class Display extends Component {
   state = {
-    display: null
+    display: null,
+    addPanelType: types.order[0]
   }
 
   componentDidMount() {
@@ -19,14 +28,80 @@ export default class Display extends Component {
     this.unregisterListener();
   }
 
-  setName = async (name) => {
+  setName = async name => {
     return firestore.collection('displays').doc(this.props.id).update({name});
+  }
+
+  addPanelTypeChanged = event => {
+    this.setState({addPanelType: event.target.value});
+  }
+
+  addPanel = () => {
+    let panelData = Object.assign({}, panelTemplates[this.state.addPanelType], {
+      id: `${Math.random()}`,
+      type: this.state.addPanelType,
+      name: `New ${types.types[this.state.addPanelType].label}`,
+      enabled: false,
+      seconds: 10
+    });
+    firestore.collection('displays').doc(this.props.id).update({
+      panels: this.state.display.data().panels.concat([panelData])
+    });
+  }
+
+  movePanelUp = async (index) => {
+    let panels = this.state.display.data().panels.slice(0);
+    let panel1 = panels[index - 1];
+    let panel2 = panels[index];
+    panels[index - 1] = panel2;
+    panels[index] = panel1;
+    firestore.collection('displays').doc(this.props.id).update({panels});
+  }
+
+  movePanelDown = (index) => {
+    this.movePanelUp(index + 1);
+  }
+
+  savePanel = (index, value) => {
+    let panels = this.state.display.data().panels.slice(0);
+    panels[index] = value;
+    firestore.collection('displays').doc(this.props.id).update({panels});
+  }
+
+  deletePanel = (index) => {
+    let panels = this.state.display.data().panels.slice(0);
+    panels.splice(index, 1);
+    firestore.collection('displays').doc(this.props.id).update({panels});
   }
 
   render() {
     if (this.state.display) {
+      let panels = this.state.display.data().panels || [];
+
       return <div>
-        <FieldEditor wrapWith={'h4'} value={this.state.display.data().name} onSave={this.setName}/>
+        <div><FieldEditor wrapWith={'h4'} value={this.state.display.data().name} onSave={this.setName}/></div>
+        <div className="Display-panel-grid">
+          {(this.state.display.data().panels || []).map((panel, index) =>
+            <PanelItem
+              key={panel.id}
+              panel={panel}
+              index={index}
+              displayId={this.props.id}
+              canMoveUp={index != 0}
+              canMoveDown={index != panels.length - 1}
+              onMoveUp={this.movePanelUp}
+              onMoveDown={this.movePanelDown}
+              onSave={this.savePanel}
+              onDelete={this.deletePanel}
+            />
+          )}
+        </div>
+        <div>
+          <select value={this.state.addPanelType} onChange={this.addPanelTypeChanged} className="Display-add-panel-field">
+            {types.order.map(type => <option key={type} value={type}>{types.types[type].label}</option>)}
+          </select>&nbsp;
+          <button onClick={this.addPanel}>Add</button>
+        </div>
       </div>;
     } else {
       return <div>Loading...</div>;
