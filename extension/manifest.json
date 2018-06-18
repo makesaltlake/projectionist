@@ -1,0 +1,13 @@
+{
+  "name": "projectionist",
+  "version": "0.0.1",
+  "description": "Lightweight tool to drive digital displays",
+  "browser_action": {
+    "default_title": "Projectionist"
+  },
+  "background": {
+    "scripts": ["background.bundle.js"],
+    "persistent": true
+  },
+  "manifest_version": 2
+}

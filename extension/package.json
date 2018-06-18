@@ -1,0 +1,16 @@
+{
+  "name": "projectionist-extension",
+  "version": "0.0.1",
+  "devDependencies": {
+    "copy-webpack-plugin": "^4.5.1",
+    "webpack": "^4.12.0",
+    "webpack-command": "^0.2.1"
+  },
+  "scripts": {
+    "build": "webpack"
+  },
+  "dependencies": {
+    "firebase": "^5.0.4",
+    "react": "^16.4.1"
+  }
+}
