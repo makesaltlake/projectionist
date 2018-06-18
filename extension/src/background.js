@@ -5,3 +5,7 @@ const OFF_COLOR = '#27b';
 
 chrome.browserAction.setBadgeText({text: 'ON'});
 chrome.browserAction.setBadgeBackgroundColor({color: ON_COLOR});
+
+chrome.browserAction.onClicked.addListener(() => {
+  chrome.runtime.openOptionsPage();
+});

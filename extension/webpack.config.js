@@ -3,7 +3,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: {
-    background: './src/background.js'
+    background: './src/background.js',
+    options: './src/options.js'
   },
   output: {
     path: path.resolve(__dirname, 'build'),
@@ -11,6 +12,11 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: 'babel-loader'
+      },
       {
         test: /\.css$/,
         use: [
@@ -22,7 +28,8 @@ module.exports = {
   },
   plugins: [
     new CopyWebpackPlugin([
-      {from: './manifest.json'}
+      {from: './manifest.json'},
+      {context: './public', from: '**/*'}
     ])
   ],
   performance: {

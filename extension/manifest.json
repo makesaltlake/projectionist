@@ -9,5 +9,9 @@
     "scripts": ["background.bundle.js"],
     "persistent": true
   },
+  "permissions": [
+    "storage"
+  ],
+  "options_page": "options.html",
   "manifest_version": 2
 }

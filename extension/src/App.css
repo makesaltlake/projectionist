@@ -1,0 +1,12 @@
+.App-outer {
+  display: flex;
+  justify-content: center;
+  margin-top: 10rem;
+  margin-bottom: 10rem;
+  width: 100%;
+  height: 100%;
+}
+
+.TokenChooser-error {
+  color: #e00;
+}
