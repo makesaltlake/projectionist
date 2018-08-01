@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import uuidv4 from 'uuid/v4';
+
 import { firestore } from '../firebase';
 
 import types from './types';
@@ -15,7 +17,9 @@ const panelTemplates = {
 export default class Display extends Component {
   state = {
     display: null,
-    addPanelType: types.order[0]
+    addPanelType: types.order[0],
+    showingToken: false,
+    creatingToken: false
   }
 
   componentDidMount() {
@@ -74,12 +78,40 @@ export default class Display extends Component {
     firestore.collection('displays').doc(this.props.id).update({panels});
   }
 
+  getToken = async () => {
+    try {
+      if (!this.state.display.get('clientToken')) {
+        this.setState({creatingToken: true});
+        await firestore.collection('displays').doc(this.props.id).update({clientToken: uuidv4()});
+      }
+    } finally {
+      this.setState({creatingToken: false, showingToken: true});
+    }
+  }
+
+  hideToken = () => {
+    this.setState({showingToken: false});
+  }
+
+  renderTokenGetter() {
+    if (this.state.display) {
+      if (this.state.showingToken) {
+        return <span>Token: {this.state.display.get('clientToken')} <a href="#" onClick={this.hideToken}>Hide</a></span>;
+      } else {
+        return <button onClick={this.getToken} disabled={this.state.creatingToken}>Get Token</button>;
+      }
+    } else {
+      return null;
+    }
+  }
+
   render() {
     if (this.state.display) {
       let panels = this.state.display.data().panels || [];
 
       return <div>
         <div><FieldEditor wrapWith={'h4'} value={this.state.display.data().name} onSave={this.setName}/></div>
+        <div>{this.renderTokenGetter()}</div>
         <div className="Display-panel-grid">
           {(this.state.display.data().panels || []).map((panel, index) =>
             <PanelItem

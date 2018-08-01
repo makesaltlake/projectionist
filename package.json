@@ -14,7 +14,8 @@
     "react-dom": "^16.4.1",
     "react-final-form": "^3.6.2",
     "react-firebaseui": "^3.0.4",
-    "react-scripts": "1.1.4"
+    "react-scripts": "1.1.4",
+    "uuid": "^3.3.2"
   },
   "scripts": {
     "start": "PORT=4700 react-scripts start",
