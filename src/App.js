@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Router } from '@reach/router';
+import { Router, Link } from '@reach/router';
 
 import { auth } from './firebase';
 
@@ -13,7 +13,7 @@ import 'milligram/dist/milligram.min.css';
 import './milligram-alterations.css';
 import './App.css';
 
-const Hi = ({logout}) => <div style={{margin: '0.5rem'}}>Hello! Looks like you're logged in. <button onClick={logout} className="button">Save</button> <button onClick={logout} className="button-outline">Cancel</button></div>
+const Hi = () => <div style={{margin: '0.5rem'}}>Hello! You probably want to <Link to="/displays">view displays</Link>.</div>
 
 class App extends Component {
   logout = () => {
